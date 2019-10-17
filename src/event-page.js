@@ -58,7 +58,6 @@ chrome.contextMenus.create({
 	contexts: ['page', 'frame', 'selection', 'link', 'editable', 'image', 'video', 'audio', 'page_action']
 });
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
-	alert(JSON.stringify(info))
 	if (info.menuItemId === 'home') {
 		chrome.tabs.create({url: 'https://chenjiahao.xyz'});
 	} else {
@@ -96,7 +95,6 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
 					if (xhr.readyState === 4) {
 						const list = JSON.parse(xhr.responseText).data.search.nodes;
 						if (list.length) {
-							console.log(list.map(_ => ({content: String(_.number), description: _.title})));
 							suggest(list.map(_ => ({content: 'ISSUE_NUMBER:' + _.number, description: '文章 - ' + _.title})))
 						} else {
 							suggest([
@@ -139,3 +137,48 @@ function openUrlCurrentTab(url) {
 
 // ==== 搜索建议结束 ======
 
+// ==== 新文章通知开始 ======
+getLatestNumber()
+function getLatestNumber () {
+	const query = `query {
+		repository(owner: "ChenJiaH", name: "blog") {
+			issues(orderBy: {field: CREATED_AT, direction: DESC}, labels: null, first: 1, after: null) {
+				nodes {
+					title
+					number
+				}
+			}
+		}
+	}`;
+	const xhr = new XMLHttpRequest();
+	xhr.open("POST", "https://api.artfe.club/transfer/github", true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4) {
+			const list = JSON.parse(xhr.responseText).data.repository.issues.nodes;
+			if (list.length) {
+				const title = list[0].title;
+				const ISSUE_NUMBER = list[0].number;
+				chrome.storage.sync.get({ISSUE_NUMBER: 0}, function(items) {
+					if (items.ISSUE_NUMBER !== ISSUE_NUMBER) {
+						chrome.storage.sync.set({ISSUE_NUMBER: ISSUE_NUMBER}, function() {
+							chrome.notifications.create('McChen', {
+								type: 'basic',
+								iconUrl: 'icon.png',
+								title: '新文章发布通知',
+								message: title
+							});
+							chrome.notifications.onClicked.addListener(function (notificationId) {
+								if (notificationId === 'McChen') {
+									chrome.tabs.create({url: 'https://chenjiahao.xyz/blog/#/archives/' + ISSUE_NUMBER});
+								}
+							})
+						});
+					}
+				});
+			}
+		}
+	};
+	xhr.send('query=' + query);
+}
+// ==== 新文章通知结束 ======

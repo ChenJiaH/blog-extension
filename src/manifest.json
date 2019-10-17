@@ -16,10 +16,9 @@
     "128": "icon.png"
   },
   "permissions": [
-    "activeTab",
-    "declarativeContent",
     "storage",
     "contextMenus",
+    "notifications",
     "https://*/"
   ],
   "browser_action": {
