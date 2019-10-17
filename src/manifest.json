@@ -1,0 +1,32 @@
+{
+  "name": "McChen",
+  "version": "0.0.1",
+  "description": "Chrome Extension for McChen.",
+  "homepage_url": "https://chenjiahao.xyz",
+  "background": {
+    "scripts": [
+      "event-page.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "contextMenus",
+    "https://*/"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "McChen",
+    "default_popup": "popup.html"
+  },
+  "omnibox": { "keyword" : "mc" },
+  "manifest_version": 2
+}
