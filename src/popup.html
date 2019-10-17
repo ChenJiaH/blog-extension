@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+  <title>McChen</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style type="text/css">
+    #McChen-container { padding: 4px 0; margin: 0; width: 80px; user-select: none; overflow: hidden; text-align: center; background-color: #f6f8fc;}
+    .McChen-item_a { position: relative; display: block; font-size: 14px; color: #283039; transition: all 0.2s; line-height: 28px; text-decoration: none; white-space: nowrap; text-indent: 16px;}
+    .McChen-item_a:before { position: absolute; top: 50%; margin-top: -14px; font-size: 16px; line-height: 28px;}
+    .McChen-item_a:after { position: absolute; top: 50%; margin-top: -14px; font-size: 16px; line-height: 28px;}
+    .McChen-item_a + .McChen-item_a { border-top: 1px solid #f0f2f5;}
+    .McChen-item_a:hover { color: #0074ff;}
+    .McChen-item_a:nth-child(1):before { content: '·'; left: 4px;}
+    .McChen-item_a:nth-child(2):before { content: '··'; left: 2px;}
+    .McChen-item_a:nth-child(3):before { content: '···'; left: 0;}
+    .McChen-item_a:nth-child(4):before { content: '····'; left: -2px;}
+    .McChen-item_a:nth-child(5):before { content: '····'; margin-top: -16px; left: -2px;}
+    .McChen-item_a:nth-child(5):after { content: '·'; margin-top: -12px; left: -2px;}
+    .McChen-item_a:nth-child(6):before { content: '····'; margin-top: -16px; left: -2px;}
+    .McChen-item_a:nth-child(6):after { content: '··'; margin-top: -12px; left: -2px;}
+    .McChen-item_a:nth-child(7):before { content: '····'; margin-top: -16px; left: -2px;}
+    .McChen-item_a:nth-child(7):after { content: '···'; margin-top: -12px; left: -2px;}
+  </style>
 </head>
-<body>
-
+<body id="McChen-container">
+  <a class="McChen-item_a" href="https://chenjiahao.xyz" target="_blank">主页</a>
+  <a class="McChen-item_a" href="https://chenjiahao.xyz/blog/#/archives" target="_blank">博客</a>
+  <a class="McChen-item_a" href="https://chenjiahao.xyz/blog/#/labels" target="_blank">标签</a>
+  <a class="McChen-item_a" href="https://chenjiahao.xyz/blog/#/links" target="_blank">友链</a>
+  <a class="McChen-item_a" href="https://chenjiahao.xyz/blog/#/about" target="_blank">关于</a>
+  <a class="McChen-item_a" href="https://chenjiahao.xyz/blog/#/board" target="_blank">留言</a>
+  <a class="McChen-item_a" href="https://chenjiahao.xyz/blog/#/search" target="_blank">搜索</a>
 </body>
 </html>
