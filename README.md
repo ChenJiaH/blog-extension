@@ -12,6 +12,10 @@
 
 3. 选择项目的 `src` 文件夹即可使用
 
+## 相关文章
+
+[【包教包会】Chrome拓展开发实践](https://github.com/ChenJiaH/blog/issues/40)
+
 ## 功能列表
 
 - [x] 内容菜单导航
