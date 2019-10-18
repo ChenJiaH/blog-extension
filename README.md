@@ -26,7 +26,7 @@
 
 [如果您有任何建议或意见，请点击这里](https://github.com/ChenJiaH/blog-extension/issues/new)
 
-## 📝 协议
+## 协议
 
 Copyright © 2019 [McChen](https://github.com/ChenJiaH).<br />
 This project is [MIT](https://github.com/ChenJiaH/blog/blob-extension/master/LICENSE) licensed.
