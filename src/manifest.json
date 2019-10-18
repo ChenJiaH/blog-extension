@@ -5,9 +5,8 @@
   "homepage_url": "https://chenjiahao.xyz",
   "background": {
     "scripts": [
-      "event-page.js"
-    ],
-    "persistent": false
+      "background.js"
+    ]
   },
   "icons": {
     "16": "icon.png",
