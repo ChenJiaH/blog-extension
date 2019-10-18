@@ -30,6 +30,11 @@
 
 [如果您有任何建议或意见，请点击这里](https://github.com/ChenJiaH/blog-extension/issues/new)
 
+## 参考文档
+
+- [https://developer.chrome.com/extensions/devguide](https://developer.chrome.com/extensions/devguide)
+- [https://github.com/sxei/chrome-plugin-demo](https://github.com/sxei/chrome-plugin-demo)
+
 ## 协议
 
 Copyright © 2019 [McChen](https://github.com/ChenJiaH).<br />
