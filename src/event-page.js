@@ -4,10 +4,6 @@
  * @Mail: chenjiahao.xyz@gmail.com
  */
 
-chrome.runtime.onInstalled.addListener(function () {
-	console.log('onInstalled');
-});
-
 // ==== 内容菜单开始 ======
 
 chrome.contextMenus.create({
