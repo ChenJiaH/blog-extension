@@ -5,7 +5,6 @@
  */
 
 // ==== 内容菜单开始 ======
-
 chrome.contextMenus.create({
 	id: 'McChen',
 	title: 'McChen',
@@ -59,17 +58,14 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
 	} else {
 		chrome.tabs.create({url: 'https://chenjiahao.xyz/blog/#/' + info.menuItemId});
 	}
-})
-
+});
 // ==== 内容菜单结束 ======
 
 // ==== 搜索建议开始 ======
-
 let timer = '';
-
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
 	if (timer) {
-		clearTimeout(timer)
+		clearTimeout(timer);
 		timer = ''
 	} else {
 		timer = setTimeout(() => {
@@ -109,32 +105,32 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
 	}
 });
 
-// 当用户接收关键字建议时触发
+// 当选中建议内容时触发
 chrome.omnibox.onInputEntered.addListener((text) => {
 	if (text.startsWith('ISSUE_NUMBER:')) {
 		const number = text.substr(13)
-		openUrlCurrentTab('https://chenjiahao.xyz/blog/#/archives/' + number);
+		chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+			if (tabs.length) {
+				const tabId = tabs[0].id;
+				const url = 'https://chenjiahao.xyz/blog/#/archives/' + number;
+				chrome.tabs.update(tabId, {url: url});
+			}
+		});
 	}
 });
-
-// 获取当前选项卡ID
-function getCurrentTabId(callback) {
-	chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-		if (callback) callback(tabs.length ? tabs[0].id : null);
-	});
-}
-
-// 当前标签打开某个链接
-function openUrlCurrentTab(url) {
-	getCurrentTabId(tabId => {
-		chrome.tabs.update(tabId, {url: url});
-	})
-}
-
 // ==== 搜索建议结束 ======
 
 // ==== 新文章通知开始 ======
-getLatestNumber()
+getLatestNumber();
+chrome.storage.sync.get({LATEST_TIMER: 0}, function (items) {
+	if (items.LATEST_TIMER) {
+		clearInterval(items.LATEST_TIMER)
+	}
+	const LATEST_TIMER = setInterval(() => {
+		getLatestNumber()
+	}, 1000 * 60 * 60 *24)
+	chrome.storage.sync.set({LATEST_TIMER: LATEST_TIMER})
+});
 function getLatestNumber () {
 	const query = `query {
 		repository(owner: "ChenJiaH", name: "blog") {
@@ -148,7 +144,7 @@ function getLatestNumber () {
 	}`;
 	const xhr = new XMLHttpRequest();
 	xhr.open("POST", "https://api.artfe.club/transfer/github", true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			const list = JSON.parse(xhr.responseText).data.repository.issues.nodes;
